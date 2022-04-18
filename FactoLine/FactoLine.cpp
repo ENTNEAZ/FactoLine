@@ -31,7 +31,7 @@ void checkScreen() {
     for (int i = 0; i < screenWidth; ++i) {
         cerr << "#";
     }
-
+    cerr << endl;
 }
 
 char anyKeydown() {
@@ -49,22 +49,15 @@ int main()
     checkScreen();
     system("pause");
     World world;
-    for (int i = 0; i < 48; i++)
-    {
-        for (int j = 0; j < 188; j++)
-        {
-            screenData[i][j] = ' ';
-            if (i == world.getPlayerLocation().getLocationX() && j == world.getPlayerLocation().getLocationY())
-                screenData[i][j] = 'O';
-        }
-    }
+    
+    world.updateData(screenData);
     while (true) {
         screenHandler(screenData);
         char a = anyKeydown();
         if (a != NULL) {
             world.playerInput(a);
         }
-        //world.updateData(data);
+        world.updateData(screenData);
     }
     
 }

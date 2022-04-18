@@ -28,7 +28,7 @@ void initialScreenHandler() {
     SetConsoleCursorInfo(hOutput, &cci);
     SetConsoleCursorInfo(hOutBuf, &cci);
 }
-void screenHandler(char data[48][188]) {
+void screenHandler(char data[48][188]) {//ÇÐ»»»º³åÇø
     if (choice == 0) {
         for (int i = 0; i < 43; i++)
         {
