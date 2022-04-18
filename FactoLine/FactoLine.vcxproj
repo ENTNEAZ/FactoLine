@@ -140,12 +140,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="FactoLine.cpp" />
+    <ClCompile Include="Location.cpp" />
+    <ClCompile Include="ScreenHandler.cpp" />
+    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Readme.md" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="Location.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
