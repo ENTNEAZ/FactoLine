@@ -1,7 +1,8 @@
 #include "ConveyorBelt.h"
 #include "Item.h"
 
-ConveyorBelt::ConveyorBelt(int x, int y,char facing) :Placeable(x, y, 0), facing(facing), tickLeft(-1), onBelt(nullptr) {
+ConveyorBelt::ConveyorBelt(int x, int y,char facing) :Placeable(x, y, 0), tickLeft(-1), onBelt(nullptr) {
+	this->facing = facing;
 	if (facing == 's' || facing == 'w') {
 		printCharacter = '|';
 	}
@@ -9,7 +10,8 @@ ConveyorBelt::ConveyorBelt(int x, int y,char facing) :Placeable(x, y, 0), facing
 		printCharacter = '-';
 	}
 }
-ConveyorBelt::ConveyorBelt(Location l,char facing) : Placeable(l, 0), facing(facing), tickLeft(-1), onBelt(nullptr) {
+ConveyorBelt::ConveyorBelt(Location l,char facing) : Placeable(l, 0), tickLeft(-1), onBelt(nullptr) {
+	this->facing = facing;
 	if (facing == 's' || facing == 'w') {
 		printCharacter = '|';
 	}
@@ -26,6 +28,12 @@ Location ConveyorBelt::getLocation()
 
 Item * ConveyorBelt::getItemOnBelt() {
 	return this->onBelt;
+}
+
+void ConveyorBelt::acceptItem(Item* i)
+{
+	this->onBelt = i;
+	this->tickLeft = 6000;
 }
 
 bool ConveyorBelt::itemOnBelt()
@@ -58,7 +66,10 @@ void ConveyorBelt::tick() {
 			printCharacter = '-';
 		}
 	}
-
+	//tickleft自减
+	if (tickLeft > 0) {
+		tickLeft--;
+	}
 	//检查tick 是否要call
 	if (tickLeft == 0) {
 		this->isOnAction = true;

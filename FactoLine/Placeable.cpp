@@ -17,14 +17,19 @@ bool Placeable::isCallingAction()
 	return this->isOnAction;
 }
 
+char Placeable::getFacing()
+{
+	return this->facing;
+}
+
 char Placeable::getPrintCharacter() {
 	return printCharacter;
 }
 
 
-Placeable::Placeable(Location l,char printCharacter) :selfLocation(l.getLocationX(), l.getLocationY()), printCharacter(printCharacter) {
+Placeable::Placeable(Location l,char printCharacter) :selfLocation(l.getLocationX(), l.getLocationY()), printCharacter(printCharacter), facing('s') {
 
 }
-Placeable::Placeable(int x, int y, char printCharacter) : selfLocation(x, y), printCharacter(printCharacter) {
+Placeable::Placeable(int x, int y, char printCharacter) : selfLocation(x, y), printCharacter(printCharacter), facing('s') {
 
 }

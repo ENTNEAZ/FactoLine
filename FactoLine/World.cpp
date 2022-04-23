@@ -104,5 +104,23 @@ void World::addPlaceableThings(Placeable * p) {
 void World::tickAll() {
 	for (auto i = this->placeableThings.begin(); i != this->placeableThings.end(); i++) {
 		(*i)->tick();
+		if ((*i)->isCallingAction()) {
+			Item* temp = (*i)->passOutItem();
+			char facing = (*i)->getFacing();
+			Location loc = (*i)->getLocation();
+			Location* cmp = nullptr;
+			if (facing == 'w' || facing == 's') {
+				cmp = new Location(loc.getLocationX() + ((facing == 'w') ? -1 : 1), loc.getLocationY());
+			}
+			else {
+				cmp = new Location(loc.getLocationX(), loc.getLocationY() + ((facing == 'a') ? -1 : 1));
+			}
+			for (auto j = this->placeableThings.begin(); i != this->placeableThings.end(); j++) {
+				if ((*i)->getLocation() == *cmp) {
+					(*i)->acceptItem(temp);
+					break;
+				}
+			}
+		}
 	}
 }

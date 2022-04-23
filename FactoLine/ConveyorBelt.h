@@ -9,12 +9,12 @@ public:
 	ConveyorBelt(int, int, char);
 	ConveyorBelt(Location, char);
 	Location getLocation();
-	virtual void tick();
+	virtual void tick() override;
 	Item * getItemOnBelt();
+	virtual void acceptItem(Item*) override;
 	bool itemOnBelt();
 	virtual Item * passOutItem() override;
 private:
-	char facing;
 	int tickLeft;
 	Item * onBelt = nullptr;
 };
