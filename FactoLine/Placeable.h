@@ -12,7 +12,7 @@ public:
 	Location getLocation();
 	void setPrintCharacter(char);
 	bool isCallingAction();
-	virtual Item passOutItem() = 0;
+	virtual Item * passOutItem() = 0;
 	virtual void tick() = 0;
 protected:
 	char printCharacter;

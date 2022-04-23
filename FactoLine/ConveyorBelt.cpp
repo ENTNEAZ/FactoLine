@@ -1,7 +1,7 @@
 #include "ConveyorBelt.h"
 #include "Item.h"
 
-ConveyorBelt::ConveyorBelt(int x, int y,char facing) :Placeable(x, y, 0), facing(facing), tickLeft(-1) {
+ConveyorBelt::ConveyorBelt(int x, int y,char facing) :Placeable(x, y, 0), facing(facing), tickLeft(-1), onBelt(nullptr) {
 	if (facing == 's' || facing == 'w') {
 		printCharacter = '|';
 	}
@@ -9,7 +9,7 @@ ConveyorBelt::ConveyorBelt(int x, int y,char facing) :Placeable(x, y, 0), facing
 		printCharacter = '-';
 	}
 }
-ConveyorBelt::ConveyorBelt(Location l,char facing) : Placeable(l, 0), facing(facing), tickLeft(-1) {
+ConveyorBelt::ConveyorBelt(Location l,char facing) : Placeable(l, 0), facing(facing), tickLeft(-1), onBelt(nullptr) {
 	if (facing == 's' || facing == 'w') {
 		printCharacter = '|';
 	}
@@ -24,23 +24,25 @@ Location ConveyorBelt::getLocation()
 	return this->selfLocation;
 }
 
-Item ConveyorBelt::getItemOnBelt() {
+Item * ConveyorBelt::getItemOnBelt() {
 	return this->onBelt;
 }
 
 bool ConveyorBelt::itemOnBelt()
 {
-	if (tickLeft != -1) {
+	if (tickLeft != -1 && onBelt == nullptr) {
 		return true;
 	}
 	return false;
 }
 
-Item ConveyorBelt::passOutItem()
+Item * ConveyorBelt::passOutItem()
 {
 	this->tickLeft = -1;
 	this->isOnAction = false;
-	return this->onBelt;
+	Item* temp = this->onBelt;
+	this->onBelt = nullptr;
+	return temp;
 }
 
 void ConveyorBelt::tick() {
