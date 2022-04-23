@@ -1,4 +1,2 @@
-﻿  World.cpp
-E:\OneDrive\Github\FactoLine\FactoLine\World.cpp(23,22): warning C4305: “=”: 从“int”到“char”截断
-E:\OneDrive\Github\FactoLine\FactoLine\World.cpp(23,17): warning C4309: “=”: 截断常量值
+﻿  ConveyorBelt.cpp
   FactoLine.vcxproj -> E:\OneDrive\Github\FactoLine\x64\Debug\FactoLine.exe
