@@ -16,6 +16,7 @@ public:
 	virtual Item * passOutItem() = 0;
 	virtual void acceptItem(Item*) = 0;
 	virtual void tick() = 0;
+	virtual bool canAcceptItem() = 0;
 protected:
 	char facing;
 	char printCharacter;

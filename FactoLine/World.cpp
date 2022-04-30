@@ -3,6 +3,7 @@
 #include "World.h"
 #include "ConveyorBelt.h"
 #include "Placeable.h"
+#include "MineMachine.h"
 
 Location& World::getPlayerLocation(){
 	return this->playerLocation;
@@ -15,6 +16,9 @@ World::World():playerLocation(Location(15,15)) {
 }
 
 void World::updateData(char data[48][188]) {
+	//tickAll
+	// 
+	this->tickAll();
 	//重置整个区域
 	// 
 	for (int i = 0; i < 48; i++)
@@ -48,6 +52,10 @@ void World::playerInput(char in) {
 			//生成一个传送带
 			newPlaceable = new ConveyorBelt(this->getPlayerLocation(), in);
 			break;
+		case 'x':
+			//生成一个采矿机
+			newPlaceable = new MineMachine(this->getPlayerLocation(), in);
+			break;
 		default:
 			newPlaceable = nullptr;
 			break;
@@ -80,11 +88,10 @@ void World::playerInput(char in) {
 				getPlayerLocation().setLocation(getPlayerLocation().getLocationX(), getPlayerLocation().getLocationY() + 1);
 			}
 			break;
-		case 'z':
+		default:
 			placeMachine = true;
 			pressKey = in;
 			break;
-		default:
 			break;
 		}
 	}
@@ -105,7 +112,6 @@ void World::tickAll() {
 	for (auto i = this->placeableThings.begin(); i != this->placeableThings.end(); i++) {
 		(*i)->tick();
 		if ((*i)->isCallingAction()) {
-			Item* temp = (*i)->passOutItem();
 			char facing = (*i)->getFacing();
 			Location loc = (*i)->getLocation();
 			Location* cmp = nullptr;
@@ -115,9 +121,11 @@ void World::tickAll() {
 			else {
 				cmp = new Location(loc.getLocationX(), loc.getLocationY() + ((facing == 'a') ? -1 : 1));
 			}
-			for (auto j = this->placeableThings.begin(); i != this->placeableThings.end(); j++) {
-				if ((*i)->getLocation() == *cmp) {
-					(*i)->acceptItem(temp);
+			for (auto j = this->placeableThings.begin(); j != this->placeableThings.end(); j++) {
+				if ((*j)->getLocation() == *cmp) {
+					if ((*j)->canAcceptItem()) {
+						(*j)->acceptItem((*i)->passOutItem());
+					}
 					break;
 				}
 			}

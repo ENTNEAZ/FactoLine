@@ -1,6 +1,8 @@
 #include "ConveyorBelt.h"
 #include "Item.h"
 
+
+const int ConveyorBelt::processTime = 500;
 ConveyorBelt::ConveyorBelt(int x, int y,char facing) :Placeable(x, y, 0), tickLeft(-1), onBelt(nullptr) {
 	this->facing = facing;
 	if (facing == 's' || facing == 'w') {
@@ -33,12 +35,12 @@ Item * ConveyorBelt::getItemOnBelt() {
 void ConveyorBelt::acceptItem(Item* i)
 {
 	this->onBelt = i;
-	this->tickLeft = 6000;
+	this->tickLeft = ConveyorBelt::processTime;
 }
 
 bool ConveyorBelt::itemOnBelt()
 {
-	if (tickLeft != -1 && onBelt == nullptr) {
+	if (tickLeft != -1 && onBelt != nullptr) {
 		return true;
 	}
 	return false;
@@ -53,10 +55,20 @@ Item * ConveyorBelt::passOutItem()
 	return temp;
 }
 
+bool ConveyorBelt::canAcceptItem()
+{
+	if (this->itemOnBelt()) {
+		return false;
+	}
+	else {
+		return true;
+	}
+}
+
 void ConveyorBelt::tick() {
 	//自己的character变化
 	if (itemOnBelt()) {
-		this->setPrintCharacter('~');
+		this->setPrintCharacter(this->onBelt->getPrintCharacter());
 	}
 	else {
 		if (this->facing == 's' || this->facing == 'w') {

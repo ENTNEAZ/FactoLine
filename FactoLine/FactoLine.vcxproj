@@ -143,6 +143,7 @@
     <ClCompile Include="FactoLine.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Location.cpp" />
+    <ClCompile Include="MineMachine.cpp" />
     <ClCompile Include="Placeable.cpp" />
     <ClCompile Include="ScreenHandler.cpp" />
     <ClCompile Include="World.cpp" />
@@ -154,6 +155,7 @@
     <ClInclude Include="ConveyorBelt.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Location.h" />
+    <ClInclude Include="MineMachine.h" />
     <ClInclude Include="Placeable.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>

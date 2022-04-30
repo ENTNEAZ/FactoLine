@@ -6,6 +6,7 @@
 
 class ConveyorBelt :public Placeable{
 public:
+	static const int processTime;
 	ConveyorBelt(int, int, char);
 	ConveyorBelt(Location, char);
 	Location getLocation();
@@ -14,6 +15,7 @@ public:
 	virtual void acceptItem(Item*) override;
 	bool itemOnBelt();
 	virtual Item * passOutItem() override;
+	virtual bool canAcceptItem() override;
 private:
 	int tickLeft;
 	Item * onBelt = nullptr;

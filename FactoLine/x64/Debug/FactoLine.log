@@ -1,7 +1,5 @@
 ﻿  ConveyorBelt.cpp
-E:\OneDrive\Github\FactoLine\FactoLine\ConveyorBelt.cpp(4,75): error C2614: “ConveyorBelt”: 非法的成员初始化:“facing”不是基或成员
-E:\OneDrive\Github\FactoLine\FactoLine\ConveyorBelt.cpp(12,71): error C2614: “ConveyorBelt”: 非法的成员初始化:“facing”不是基或成员
-  FactoLine.cpp
-  Placeable.cpp
+  MineMachine.cpp
   World.cpp
   正在生成代码...
+  FactoLine.vcxproj -> E:\OneDrive\Github\FactoLine\x64\Debug\FactoLine.exe
