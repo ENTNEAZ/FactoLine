@@ -1,10 +1,16 @@
 #include <iostream>
+#include <chrono>
 #include "Location.h"
 #include "World.h"
 #include "ConveyorBelt.h"
 #include "Placeable.h"
 #include "MineMachine.h"
 #include "VoidHole.h"
+
+using std::chrono::duration_cast;
+using std::chrono::milliseconds;
+using std::chrono::seconds;
+using std::chrono::system_clock;
 
 Location& World::getPlayerLocation(){
 	return this->playerLocation;
@@ -19,7 +25,11 @@ World::World():playerLocation(Location(15,15)) {
 void World::updateData(char data[48][188]) {
 	//tickAll
 	// 
+	static auto timeTemp = duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count();
+	static int tickPass = 0;
+	static int tickTemp = 0;
 	this->tickAll();
+	tickPass++;
 	//重置整个区域
 	// 
 	for (int i = 0; i < 48; i++)
@@ -29,8 +39,24 @@ void World::updateData(char data[48][188]) {
 			data[i][j] = ' ';
 		}
 	}
-	
 
+	//统计每秒tick
+
+	if (duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count() - timeTemp >= 1000) {
+		//1s过去了
+		timeTemp = duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count();
+		tickTemp = tickPass;
+		tickPass = 0;
+	}
+
+	//显示tick per second
+	data[29][0] = 't';
+	data[29][1] = 'p';
+	data[29][2] = 's';
+	data[29][3] = ':';
+	data[29][4] = '0' + tickTemp / 100;
+	data[29][5] = '0' + (tickTemp - (tickTemp / 100) * 100) / 10;
+	data[29][6] = '0' + tickTemp - (tickTemp / 100) * 100 - ((tickTemp - (tickTemp / 100) * 100) / 10) * 10;
 	//各种机器摆放
 	for (auto i = this->placeableThings.begin(); i != this->placeableThings.end(); i++) {
 		Location placeableLocation = (*i)->getLocation();
