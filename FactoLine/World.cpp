@@ -84,6 +84,7 @@ void World::playerInput(char in) {
 			newPlaceable = new MineMachine(this->getPlayerLocation(), in);
 			break;
 		case 'c':
+			//生成一个虚空洞
 			newPlaceable = new VoidHole(this->getPlayerLocation());
 			break;
 		default:
@@ -128,7 +129,6 @@ void World::playerInput(char in) {
 		default:
 			placeMachine = true;
 			pressKey = in;
-			break;
 			break;
 		}
 	}
