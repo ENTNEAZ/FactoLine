@@ -39,6 +39,9 @@
     <ClCompile Include="MineMachine.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="VoidHole.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Readme.md" />
@@ -60,6 +63,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="MineMachine.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="VoidHole.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

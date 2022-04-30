@@ -4,6 +4,7 @@
 #include "ConveyorBelt.h"
 #include "Placeable.h"
 #include "MineMachine.h"
+#include "VoidHole.h"
 
 Location& World::getPlayerLocation(){
 	return this->playerLocation;
@@ -56,11 +57,21 @@ void World::playerInput(char in) {
 			//生成一个采矿机
 			newPlaceable = new MineMachine(this->getPlayerLocation(), in);
 			break;
+		case 'c':
+			newPlaceable = new VoidHole(this->getPlayerLocation());
+			break;
 		default:
 			newPlaceable = nullptr;
 			break;
 		}
 		if (newPlaceable != nullptr) {
+			for (auto i = this->placeableThings.begin(); i != this->placeableThings.end(); i++) {
+				if ((*i)->getLocation() == newPlaceable->getLocation()) {
+					delete (*i);
+					this->placeableThings.erase(i);
+					break;
+				}
+			}
 			this->addPlaceableThings(newPlaceable);
 		}
 		placeMachine = false;

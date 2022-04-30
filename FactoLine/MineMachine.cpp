@@ -37,6 +37,7 @@ void MineMachine::tick()
         tickLeft = MineMachine::processTime;
         if (this->output == nullptr) {
             Item* temp = new Item("Iron ore", '~');
+            //TODO 生成不同的矿物
             this->output = temp;
             this->isOnAction = true;
         }

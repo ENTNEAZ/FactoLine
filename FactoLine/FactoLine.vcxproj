@@ -146,6 +146,7 @@
     <ClCompile Include="MineMachine.cpp" />
     <ClCompile Include="Placeable.cpp" />
     <ClCompile Include="ScreenHandler.cpp" />
+    <ClCompile Include="VoidHole.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +158,7 @@
     <ClInclude Include="Location.h" />
     <ClInclude Include="MineMachine.h" />
     <ClInclude Include="Placeable.h" />
+    <ClInclude Include="VoidHole.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

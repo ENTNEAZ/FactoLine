@@ -6,7 +6,7 @@ public:
 	void setLocation(int x,int y);
 	int getLocationX();
 	int getLocationY();
-	bool operator==(Location&);
+	bool operator==(Location);
 private:
 	int x;
 	int y;
