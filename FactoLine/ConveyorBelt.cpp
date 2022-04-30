@@ -57,12 +57,7 @@ Item * ConveyorBelt::passOutItem()
 
 bool ConveyorBelt::canAcceptItem()
 {
-	if (this->itemOnBelt()) {
-		return false;
-	}
-	else {
-		return true;
-	}
+	return(!this->itemOnBelt());
 }
 
 void ConveyorBelt::tick() {
