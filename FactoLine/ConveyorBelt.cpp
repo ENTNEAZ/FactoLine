@@ -42,7 +42,7 @@ void ConveyorBelt::acceptItem(Item* i)
 
 bool ConveyorBelt::itemOnBelt()
 {
-	if (tickLeft != -1 && onMachine != nullptr) {
+	if (tickLeft != -1 && this->hasItem()) {
 		return true;
 	}
 	return false;

@@ -7,6 +7,7 @@
 #include "MineMachine.h"
 #include "VoidHole.h"
 #include "RoboticArm.h"
+#include "Furnance.h"
 
 using std::chrono::duration_cast;
 using std::chrono::milliseconds;
@@ -95,6 +96,10 @@ void World::playerInput(char in) {
 		case 'v':
 			//生成一个机械臂
 			newPlaceable = new RoboticArm(this->getPlayerLocation(), in);
+			break;
+		case 'f':
+			//生成一个熔炉
+			newPlaceable = new Furnance(this->getPlayerLocation());
 			break;
 		default:
 			newPlaceable = nullptr;

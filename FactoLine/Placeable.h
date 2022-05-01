@@ -9,7 +9,7 @@ public:
 	Placeable(Location, char = 0);
 	Placeable(int x,int y, char = 0);
 	char getPrintCharacter();
-	bool hasItem();
+	virtual bool hasItem();
 	Location getLocation();
 	void setPrintCharacter(char);
 	bool isCallingAction();

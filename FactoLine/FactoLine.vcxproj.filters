@@ -45,6 +45,9 @@
     <ClCompile Include="RoboticArm.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Furnance.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Readme.md" />
@@ -72,6 +75,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="RoboticArm.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Furnance.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

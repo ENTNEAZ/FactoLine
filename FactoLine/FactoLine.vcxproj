@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="ConveyorBelt.cpp" />
     <ClCompile Include="FactoLine.cpp" />
+    <ClCompile Include="Furnance.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Location.cpp" />
     <ClCompile Include="MineMachine.cpp" />
@@ -155,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConveyorBelt.h" />
+    <ClInclude Include="Furnance.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Location.h" />
     <ClInclude Include="MineMachine.h" />

@@ -13,3 +13,9 @@ char Item::getPrintCharacter()
 {
     return this->printCharacter;
 }
+
+void Item::setNameAndPrintCharacter(string n, char p)
+{
+    this->name = n;
+    this->printCharacter = p;
+}
