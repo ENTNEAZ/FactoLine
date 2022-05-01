@@ -18,6 +18,5 @@ public:
 	virtual bool canAcceptItem() override;
 private:
 	int tickLeft;
-	Item * onBelt = nullptr;
 };
 #endif // !ConveyorBelt

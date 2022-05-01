@@ -3,7 +3,8 @@
 
 
 const int ConveyorBelt::processTime = 500;
-ConveyorBelt::ConveyorBelt(int x, int y,char facing) :Placeable(x, y, 0), tickLeft(-1), onBelt(nullptr) {
+ConveyorBelt::ConveyorBelt(int x, int y,char facing) :Placeable(x, y, 0), tickLeft(-1) {
+	this->onMachine = nullptr;
 	this->facing = facing;
 	if (facing == 's' || facing == 'w') {
 		printCharacter = '|';
@@ -12,7 +13,8 @@ ConveyorBelt::ConveyorBelt(int x, int y,char facing) :Placeable(x, y, 0), tickLe
 		printCharacter = '-';
 	}
 }
-ConveyorBelt::ConveyorBelt(Location l,char facing) : Placeable(l, 0), tickLeft(-1), onBelt(nullptr) {
+ConveyorBelt::ConveyorBelt(Location l,char facing) : Placeable(l, 0), tickLeft(-1) {
+	this->onMachine = nullptr;
 	this->facing = facing;
 	if (facing == 's' || facing == 'w') {
 		printCharacter = '|';
@@ -29,18 +31,18 @@ Location ConveyorBelt::getLocation()
 }
 
 Item * ConveyorBelt::getItemOnBelt() {
-	return this->onBelt;
+	return this->onMachine;
 }
 
 void ConveyorBelt::acceptItem(Item* i)
 {
-	this->onBelt = i;
+	this->onMachine = i;
 	this->tickLeft = ConveyorBelt::processTime;
 }
 
 bool ConveyorBelt::itemOnBelt()
 {
-	if (tickLeft != -1 && onBelt != nullptr) {
+	if (tickLeft != -1 && onMachine != nullptr) {
 		return true;
 	}
 	return false;
@@ -50,8 +52,8 @@ Item * ConveyorBelt::passOutItem()
 {
 	this->tickLeft = -1;
 	this->isOnAction = false;
-	Item* temp = this->onBelt;
-	this->onBelt = nullptr;
+	Item* temp = this->onMachine;
+	this->onMachine = nullptr;
 	return temp;
 }
 
@@ -63,7 +65,7 @@ bool ConveyorBelt::canAcceptItem()
 void ConveyorBelt::tick() {
 	//自己的character变化
 	if (itemOnBelt()) {
-		this->setPrintCharacter(this->onBelt->getPrintCharacter());
+		this->setPrintCharacter(this->onMachine->getPrintCharacter());
 	}
 	else {
 		if (this->facing == 's' || this->facing == 'w') {

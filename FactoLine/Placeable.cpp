@@ -26,10 +26,15 @@ char Placeable::getPrintCharacter() {
 	return printCharacter;
 }
 
+bool Placeable::hasItem()
+{
+	return onMachine != nullptr;
+}
 
-Placeable::Placeable(Location l,char printCharacter) :selfLocation(l.getLocationX(), l.getLocationY()), printCharacter(printCharacter), facing('s') {
+
+Placeable::Placeable(Location l,char printCharacter) :selfLocation(l.getLocationX(), l.getLocationY()), printCharacter(printCharacter), facing('s'), onMachine(nullptr) {
 
 }
-Placeable::Placeable(int x, int y, char printCharacter) : selfLocation(x, y), printCharacter(printCharacter), facing('s') {
+Placeable::Placeable(int x, int y, char printCharacter) : selfLocation(x, y), printCharacter(printCharacter), facing('s'), onMachine(nullptr) {
 
 }

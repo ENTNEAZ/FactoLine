@@ -42,22 +42,28 @@ char anyKeydown() {
 	}
     return input;
 }
+static World* world = nullptr;
+
+World* getWorld() {
+    return world;
+}
 
 int main()
 {
     initialScreenHandler();
     checkScreen();
     system("pause");
-    World world;
     
-    world.updateData(screenData);
+    world = new World();
+
+    world->updateData(screenData);
     while (true) {
         screenHandler(screenData);
         char a = anyKeydown();
         if (a != NULL) {
-            world.playerInput(a);
+            world->playerInput(a);
         }
-        world.updateData(screenData);
+        world->updateData(screenData);
     }
     
 }

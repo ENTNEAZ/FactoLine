@@ -3,42 +3,44 @@
 
 const int MineMachine::processTime = 2000;
 
-MineMachine::MineMachine(int x, int y, char facing):Placeable(x,y,'M'), tickLeft(MineMachine::processTime), output(nullptr)
+MineMachine::MineMachine(int x, int y, char facing):Placeable(x,y,'M'), tickLeft(MineMachine::processTime)
 {
+    this->onMachine = nullptr;
     this->facing = facing;
 }
 
-MineMachine::MineMachine(Location l, char facing) : Placeable(l, 'M'), tickLeft(MineMachine::processTime), output(nullptr)
+MineMachine::MineMachine(Location l, char facing) : Placeable(l, 'M'), tickLeft(MineMachine::processTime)
 {
+    this->onMachine = nullptr;
     this->facing = facing;
 }
 
 Item* MineMachine::passOutItem()
 {
-    Item* temp = this->output;
-    this->output = nullptr;
+    Item* temp = this->onMachine;
+    this->onMachine = nullptr;
+    this->isOnAction = false;
     return temp;
 }
 
 void MineMachine::acceptItem(Item* in)
 {
-    this->output = in;
+    this->onMachine = in;
     this->isOnAction = true;
 
 }
 
 void MineMachine::tick()
 {
-    if (this->output != nullptr) {
-        this->isOnAction = true;
-    }
+    this->isOnAction = (this->onMachine == nullptr) ? false : true;
+
     tickLeft--;
     if (tickLeft == 0) {
         tickLeft = MineMachine::processTime;
-        if (this->output == nullptr) {
+        if (this->onMachine == nullptr) {
             Item* temp = new Item("Iron ore", '~');
             //TODO 生成不同的矿物
-            this->output = temp;
+            this->onMachine = temp;
             this->isOnAction = true;
         }
         

@@ -15,6 +15,5 @@ public:
 	virtual bool canAcceptItem() override;
 private:
 	int tickLeft;
-	Item* output;
 };
 #endif // !MineMachine

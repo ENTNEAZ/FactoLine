@@ -6,14 +6,18 @@
 
 class RoboticArm :public Placeable {
 public:
+	static const int grabCoolDownTime;
+	static const int dropCoolDownTime;
 	RoboticArm(int, int, char);
 	RoboticArm(Location, char);
+	void updateArmBefore();
+	void setNormalPrintCharater();
 	virtual Item* passOutItem();
 	virtual void acceptItem(Item*);
 	virtual void tick();
 	virtual bool canAcceptItem();
 private:
 	int tickLeft;
-	Item* onArm;
+	Placeable* armBefore;
 };
 #endif // !RoboticArm

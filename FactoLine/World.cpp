@@ -6,6 +6,7 @@
 #include "Placeable.h"
 #include "MineMachine.h"
 #include "VoidHole.h"
+#include "RoboticArm.h"
 
 using std::chrono::duration_cast;
 using std::chrono::milliseconds;
@@ -20,6 +21,10 @@ Location& World::getPlayerLocation(){
 
 World::World():playerLocation(Location(15,15)) {
 
+}
+
+vector<Placeable*> World::getPlaceableThings() const{
+	return this->placeableThings;
 }
 
 void World::updateData(char data[48][188]) {
@@ -86,6 +91,10 @@ void World::playerInput(char in) {
 		case 'c':
 			//生成一个虚空洞
 			newPlaceable = new VoidHole(this->getPlayerLocation());
+			break;
+		case 'v':
+			//生成一个机械臂
+			newPlaceable = new RoboticArm(this->getPlayerLocation(), in);
 			break;
 		default:
 			newPlaceable = nullptr;
