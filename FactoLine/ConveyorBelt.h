@@ -9,6 +9,7 @@ public:
 	static const int processTime;
 	ConveyorBelt(int, int, char);
 	ConveyorBelt(Location, char);
+	void setNormalPrintCharater();
 	Location getLocation();
 	virtual void tick() override;
 	Item * getItemOnBelt();

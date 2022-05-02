@@ -6,17 +6,17 @@ const int ConveyorBelt::processTime = 500;
 ConveyorBelt::ConveyorBelt(int x, int y,char facing) :Placeable(x, y, 0), tickLeft(-1) {
 	this->onMachine = nullptr;
 	this->facing = facing;
-	if (facing == 's' || facing == 'w') {
-		printCharacter = '|';
-	}
-	else {
-		printCharacter = '-';
-	}
+	this->setNormalPrintCharater();
 }
 ConveyorBelt::ConveyorBelt(Location l,char facing) : Placeable(l, 0), tickLeft(-1) {
 	this->onMachine = nullptr;
 	this->facing = facing;
-	if (facing == 's' || facing == 'w') {
+	this->setNormalPrintCharater();
+}
+
+void ConveyorBelt::setNormalPrintCharater()
+{
+	if (this->facing == 's' || this->facing == 'w') {
 		printCharacter = '|';
 	}
 	else {
@@ -68,12 +68,7 @@ void ConveyorBelt::tick() {
 		this->setPrintCharacter(this->onMachine->getPrintCharacter());
 	}
 	else {
-		if (this->facing == 's' || this->facing == 'w') {
-			printCharacter = '|';
-		}
-		else {
-			printCharacter = '-';
-		}
+		this->setNormalPrintCharater();
 	}
 	//tickleft×Ô¼õ
 	if (tickLeft > 0) {
