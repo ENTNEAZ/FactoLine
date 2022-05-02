@@ -63,6 +63,27 @@ void World::updateData(char data[48][188]) {
 	data[29][4] = '0' + tickTemp / 100;
 	data[29][5] = '0' + (tickTemp - (tickTemp / 100) * 100) / 10;
 	data[29][6] = '0' + tickTemp - (tickTemp / 100) * 100 - ((tickTemp - (tickTemp / 100) * 100) / 10) * 10;
+
+	//显示目标
+	data[0][0] = 't';
+	data[0][1] = 'a';
+	data[0][2] = 'r';
+	data[0][3] = 'g';
+	data[0][4] = 'e';
+	data[0][5] = 't';
+	data[0][6] = ':';
+
+	data[0][7] = '0' + VoidHole::eatedIronPlate / 1000;
+	data[0][8] = '0' + (VoidHole::eatedIronPlate - (VoidHole::eatedIronPlate / 1000 * 1000)) / 100;
+	data[0][9] = '0' + (VoidHole::eatedIronPlate - (VoidHole::eatedIronPlate / 1000 * 1000) - ((VoidHole::eatedIronPlate - (VoidHole::eatedIronPlate / 1000 * 1000)) / 100) * 100) / 10;
+	data[0][10] = '0' + VoidHole::eatedIronPlate % 10;
+
+	data[0][11] = '/';
+
+	data[0][12] = '2';
+	data[0][13] = '0';
+	data[0][14] = '0';
+	data[0][15] = '0';
 	//各种机器摆放
 	for (auto i = this->placeableThings.begin(); i != this->placeableThings.end(); i++) {
 		Location placeableLocation = (*i)->getLocation();
