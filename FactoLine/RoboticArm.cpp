@@ -25,7 +25,7 @@ RoboticArm::RoboticArm(Location l, char facing) :Placeable(l, ' '), tickLeft(-1)
 		this->setPrintCharacter('<');
 		break;
 	case 's':
-		this->setPrintCharacter('V');
+		this->setPrintCharacter('v');
 		break;
 	case 'd':
 		this->setPrintCharacter('>');

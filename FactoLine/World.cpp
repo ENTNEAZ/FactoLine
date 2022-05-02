@@ -31,10 +31,10 @@ vector<Placeable*> World::getPlaceableThings() const{
 void World::updateData(char data[48][188]) {
 	//tickAll
 	// 
+	this->tickAll();
 	static auto timeTemp = duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count();
 	static int tickPass = 0;
 	static int tickTemp = 0;
-	this->tickAll();
 	tickPass++;
 	//重置整个区域
 	// 
@@ -60,7 +60,7 @@ void World::updateData(char data[48][188]) {
 	data[29][1] = 'p';
 	data[29][2] = 's';
 	data[29][3] = ':';
-	data[29][4] = '0' + tickTemp / 100;
+	data[29][4] = '0' + (tickTemp / 100 >= 10)?'X' - '0':(tickTemp / 100);
 	data[29][5] = '0' + (tickTemp - (tickTemp / 100) * 100) / 10;
 	data[29][6] = '0' + tickTemp - (tickTemp / 100) * 100 - ((tickTemp - (tickTemp / 100) * 100) / 10) * 10;
 

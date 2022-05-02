@@ -5,6 +5,7 @@
 
 class Furnance :public Placeable {
 public:
+	static const int processTime;
 	Furnance(int x, int y);
 	Furnance(Location);
 	virtual bool hasItem() override;

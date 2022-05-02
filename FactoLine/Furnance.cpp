@@ -1,5 +1,7 @@
 #include "Furnance.h"
 
+
+const int Furnance::processTime = 10000;
 Furnance::Furnance(int x, int y) :Placeable(x, y, 'F'), tickLeft(-1)
 {
 }
@@ -34,7 +36,7 @@ void Furnance::acceptItem(Item* i)
         {
         case '~':
         //case 'x':
-            tickLeft = 10000;
+            tickLeft = Furnance::processTime;
             break;
         default:
             tickLeft = 0;
