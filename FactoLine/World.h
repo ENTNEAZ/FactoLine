@@ -11,9 +11,11 @@ public:
 	void playerInput(char);
 	vector<Placeable*> getPlaceableThings() const;
 	void updateData(char [48][188]);
+	void changePlayerPositionByFacing(char);
 	bool checkLocationLegal(Location);
 	void addPlaceableThings(Placeable *);
 	void tickAll();
+	void addPlaceable(char, Location, char);
 private:
 	Location playerLocation;
 	vector<Placeable *> placeableThings;

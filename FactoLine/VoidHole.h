@@ -4,6 +4,7 @@
 #include "Location.h"
 class VoidHole :public Placeable {
 public:
+	static int eatedIronPlate;
 	VoidHole(int, int);
 	VoidHole(Location);
 	virtual Item* passOutItem();

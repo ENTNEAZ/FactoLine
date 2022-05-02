@@ -1,6 +1,6 @@
 #include "VoidHole.h"
 
-
+int VoidHole::eatedIronPlate = 0;
 VoidHole::VoidHole(int x, int y) :Placeable(x,y,'s')
 {
     this->setPrintCharacter('X');
@@ -18,6 +18,7 @@ Item* VoidHole::passOutItem()
 
 void VoidHole::acceptItem(Item* i)
 {
+    VoidHole::eatedIronPlate++;
     delete i;
 }
 

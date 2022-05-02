@@ -116,7 +116,7 @@ void RoboticArm::tick()
 			if (armBefore != nullptr && armBefore->hasItem()) {
 				Item* temp = armBefore->passOutItem();
 				this->onMachine = temp;
-				this->setPrintCharacter(temp->getPrintCharacter());
+				//this->setPrintCharacter(temp->getPrintCharacter());
 				tickLeft = RoboticArm::grabCoolDownTime;
 			}
 		}

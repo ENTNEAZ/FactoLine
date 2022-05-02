@@ -74,80 +74,74 @@ void World::updateData(char data[48][188]) {
 	data[this->getPlayerLocation().getLocationX()][this->getPlayerLocation().getLocationY()] = 'O';
 }
 void World::playerInput(char in) {
-	static bool placeMachine = false;
+	static bool placedMachine = false;
 	static char pressKey = 0;
-	if (placeMachine && (in == 'a' || in == 's' || in == 'd' || in == 'w'))
-	{
-		Placeable* newPlaceable = nullptr;
-		switch (pressKey)
-		{
-		case 'z':
-			//生成一个传送带
-			newPlaceable = new ConveyorBelt(this->getPlayerLocation(), in);
-			break;
-		case 'x':
-			//生成一个采矿机
-			newPlaceable = new MineMachine(this->getPlayerLocation(), in);
-			break;
-		case 'c':
-			//生成一个虚空洞
-			newPlaceable = new VoidHole(this->getPlayerLocation());
-			break;
-		case 'v':
-			//生成一个机械臂
-			newPlaceable = new RoboticArm(this->getPlayerLocation(), in);
-			break;
-		case 'f':
-			//生成一个熔炉
-			newPlaceable = new Furnance(this->getPlayerLocation());
-			break;
-		default:
-			newPlaceable = nullptr;
-			break;
-		}
-		if (newPlaceable != nullptr) {
-			for (auto i = this->placeableThings.begin(); i != this->placeableThings.end(); i++) {
-				if ((*i)->getLocation() == newPlaceable->getLocation()) {
-					delete (*i);
-					this->placeableThings.erase(i);
-					break;
-				}
-			}
-			this->addPlaceableThings(newPlaceable);
-		}
-		placeMachine = false;
+	char realIn = in;//一定是个小写字母
+
+	if (in <= 90 && in >= 65) {
+		//是个大写字母
+		realIn = in | 0x20;
 	}
-	else {
-		switch (in)
-		{
-		case 'w':
-			if (checkLocationLegal(Location(getPlayerLocation().getLocationX() - 1, getPlayerLocation().getLocationY()))) {
-				getPlayerLocation().setLocation(getPlayerLocation().getLocationX() - 1, getPlayerLocation().getLocationY());
-			}
-			break;
-		case 's':
-			if (checkLocationLegal(Location(getPlayerLocation().getLocationX() + 1, getPlayerLocation().getLocationY()))) {
-				getPlayerLocation().setLocation(getPlayerLocation().getLocationX() + 1, getPlayerLocation().getLocationY());
-			}
-			break;
-		case 'a':
-			if (checkLocationLegal(Location(getPlayerLocation().getLocationX(), getPlayerLocation().getLocationY() - 1))) {
-				getPlayerLocation().setLocation(getPlayerLocation().getLocationX(), getPlayerLocation().getLocationY() - 1);
-			}
-			break;
-		case 'd':
-			if (checkLocationLegal(Location(getPlayerLocation().getLocationX(), getPlayerLocation().getLocationY() + 1))) {
-				getPlayerLocation().setLocation(getPlayerLocation().getLocationX(), getPlayerLocation().getLocationY() + 1);
-			}
-			break;
-		default:
-			placeMachine = true;
-			pressKey = in;
-			break;
+
+	switch (in)
+	{
+	case 'w':
+	case 'a':
+	case 's':
+	case 'd':
+		if (!placedMachine) {
+			placedMachine = true;
+			this->addPlaceable(pressKey,this->getPlayerLocation(), realIn);
 		}
+		this->changePlayerPositionByFacing(realIn);
+		break;
+	case 'W':
+	case 'A':
+	case 'S':
+	case 'D':
+		this->addPlaceable(pressKey, this->getPlayerLocation(), realIn);
+		this->changePlayerPositionByFacing(realIn);
+		break;
+	default:
+		placedMachine = false;
+		pressKey = realIn;
+		break;
 	}
 	
 }
+
+void World::changePlayerPositionByFacing(char in) {
+	switch (in)
+	{
+	case 'w':
+	case 'W':
+		if (checkLocationLegal(Location(getPlayerLocation().getLocationX() - 1, getPlayerLocation().getLocationY()))) {
+			getPlayerLocation().setLocation(getPlayerLocation().getLocationX() - 1, getPlayerLocation().getLocationY());
+		}
+		break;
+	case 's':
+	case 'S':
+		if (checkLocationLegal(Location(getPlayerLocation().getLocationX() + 1, getPlayerLocation().getLocationY()))) {
+			getPlayerLocation().setLocation(getPlayerLocation().getLocationX() + 1, getPlayerLocation().getLocationY());
+		}
+		break;
+	case 'a':
+	case 'A':
+		if (checkLocationLegal(Location(getPlayerLocation().getLocationX(), getPlayerLocation().getLocationY() - 1))) {
+			getPlayerLocation().setLocation(getPlayerLocation().getLocationX(), getPlayerLocation().getLocationY() - 1);
+		}
+		break;
+	case 'd':
+	case 'D':
+		if (checkLocationLegal(Location(getPlayerLocation().getLocationX(), getPlayerLocation().getLocationY() + 1))) {
+			getPlayerLocation().setLocation(getPlayerLocation().getLocationX(), getPlayerLocation().getLocationY() + 1);
+		}
+		break;
+	default:
+		break;
+	}
+}
+
 bool World::checkLocationLegal(Location c) {
 	if (c.getLocationX() < 0 || c.getLocationX() > 29 || c.getLocationY() < 0 || c.getLocationY() > 119)
 		return false;
@@ -181,5 +175,58 @@ void World::tickAll() {
 				}
 			}
 		}
+	}
+}
+
+void World::addPlaceable(char in, Location l, char facing) {
+
+	char realIn = in;
+	if (in <= 90 && in >= 65) {
+		//是个大写字母
+		realIn = in | 0x20;
+	}
+
+	Placeable* newPlaceable = nullptr;
+	switch (in)
+	{
+	case 'z':
+	case 'Z':
+		//生成一个传送带
+		newPlaceable = new ConveyorBelt(l, facing);
+		break;
+	case 'x':
+	case 'X':
+		//生成一个采矿机
+		newPlaceable = new MineMachine(l, facing);
+		break;
+	case 'c':
+	case 'C':
+		//生成一个虚空洞
+		newPlaceable = new VoidHole(l);
+		break;
+	case 'v':
+	case 'V':
+		//生成一个机械臂
+		newPlaceable = new RoboticArm(l, facing);
+		break;
+	case 'f':
+	case 'F':
+		//生成一个熔炉
+		newPlaceable = new Furnance(l);
+		break;
+	default:
+		newPlaceable = nullptr;
+		break;
+	}
+
+	if (newPlaceable != nullptr) {
+		for (auto i = this->placeableThings.begin(); i != this->placeableThings.end(); i++) {
+			if ((*i)->getLocation() == newPlaceable->getLocation()) {
+				delete (*i);
+				this->placeableThings.erase(i);
+				break;
+			}
+		}
+		this->addPlaceableThings(newPlaceable);
 	}
 }
