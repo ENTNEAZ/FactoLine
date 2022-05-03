@@ -4,6 +4,11 @@ Item::Item(string name, char printCharacter) :name(name), printCharacter(printCh
 
 }
 
+Item::~Item()
+{
+    this->name.clear();
+}
+
 string Item::getName()
 {
     return this->name;

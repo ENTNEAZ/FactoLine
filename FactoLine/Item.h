@@ -5,6 +5,7 @@ using namespace std;
 class Item {
 public:
 	Item(string = "", char = 0);
+	~Item();
 	string getName();
 	char getPrintCharacter();
 	void setNameAndPrintCharacter(string, char);
