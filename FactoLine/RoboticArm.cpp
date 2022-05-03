@@ -54,6 +54,8 @@ void RoboticArm::updateArmBefore()
 		if ((*i)->getLocation() == *cmp) {
 			this->armBefore = *i;
 			updated = true;
+			if (cmp != nullptr)
+				delete cmp;
 			break;
 		}
 	}
@@ -73,7 +75,7 @@ void RoboticArm::setNormalPrintCharater()
 		this->setPrintCharacter('<');
 		break;
 	case 's':
-		this->setPrintCharacter('V');
+		this->setPrintCharacter('v');
 		break;
 	case 'd':
 		this->setPrintCharacter('>');
