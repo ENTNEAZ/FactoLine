@@ -1,5 +1,6 @@
 #include <iostream>
 #include <chrono>
+
 #include "Location.h"
 #include "World.h"
 #include "ConveyorBelt.h"
@@ -8,6 +9,7 @@
 #include "VoidHole.h"
 #include "RoboticArm.h"
 #include "Furnance.h"
+#include "CraftingMachine.h"
 
 using std::chrono::duration_cast;
 using std::chrono::milliseconds;
@@ -234,6 +236,11 @@ void World::addPlaceable(char in, Location l, char facing) {
 	case 'F':
 		//生成一个熔炉
 		newPlaceable = new Furnance(l);
+		break;
+	case 'e':
+	case 'E':
+		//生成一个合成机
+		newPlaceable = new CraftingMachine(l);
 		break;
 	default:
 		newPlaceable = nullptr;

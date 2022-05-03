@@ -12,7 +12,7 @@ Furnance::Furnance(Location l) : Placeable(l, 'F'), tickLeft(-1)
 
 bool Furnance::hasItem()
 {
-    if (this->tickLeft == 0)
+    if (this->tickLeft == 0)//Ä¿µÄÊÇÎªÁË·ÀÖ¹»úĞµÊÖÂÒÍµ
         return true;
     else
         return false;
@@ -31,7 +31,7 @@ void Furnance::acceptItem(Item* i)
 {
     if (this->canAcceptItem()) {
         this->onMachine = i;
-        this->setPrintCharacter(i->getPrintCharacter());
+        //this->setPrintCharacter(i->getPrintCharacter());
         switch (i->getPrintCharacter())
         {
         case '~':
@@ -54,9 +54,9 @@ void Furnance::tick()
         switch (this->onMachine->getPrintCharacter())
         {
         case '~':
-            //ÊäÈëÌú¿ó Êä³öÌú°å
-            this->onMachine->setNameAndPrintCharacter("Iron plate", '@');
-            this->setPrintCharacter(this->onMachine->getPrintCharacter());
+            //ÊäÈëÌú¿ó Êä³öÌú¶§
+            this->onMachine->setNameAndPrintCharacter("Iron Ingot", 'a');
+            //this->setPrintCharacter(this->onMachine->getPrintCharacter());
             break;
         default:
             break;
