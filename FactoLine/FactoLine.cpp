@@ -21,17 +21,41 @@ extern void screenHandler(char data[48][188]);
 
 void checkScreen() {
     for (int i = 0; i < screenWidth; ++i) {
-        cerr << "#";
+        cout << "#";
     }
-    cerr << endl << setw(screenWidth - 1) << left << "#请将屏幕调整到可以显示全部#,按任意键继续" << "#" << endl;
-    for (int i = 0; i < screenHeight - 3; i++) {
-        cerr << "#" << setw(screenWidth - 1) << right << "#" << endl;
+    cout << endl;
+
+    cout << setw(screenWidth - 1) << left << "# ____  __    ___  ____  __   __    __  __ _  ____ " << "#" << endl;
+    cout << setw(screenWidth - 1) << left << "#(  __)/ _\\  / __)(_  _)/  \\ (  )  (  )(  ( \\(  __)" << "#" << endl;
+    cout << setw(screenWidth - 1) << left << "# ) _)/    \\( (__   )( (  O )/ (_/\\ )( /    / ) _)" << "#" << endl;
+    cout << setw(screenWidth - 1) << left << "#(__) \\_/\\_/ \\___) (__) \\__/ \\____/(__)\\_)__)(____)" << "#" << endl;
+    cout << setw(screenWidth - 1) << left << "#" << "#" << endl;
+    cout << setw(screenWidth - 1) << left << "#按键提示：" << "#" << endl;
+    cout << setw(screenWidth - 1) << left << "#" << "#" << endl;
+    cout << setw(screenWidth - 1) << left << "#z:传送带" << "#" << endl;
+    cout << setw(screenWidth - 1) << left << "#x:采矿机" << "#" << endl;
+    cout << setw(screenWidth - 1) << left << "#c:虚空洞" << "#" << endl;
+    cout << setw(screenWidth - 1) << left << "#v:机械臂" << "#" << endl;
+    cout << setw(screenWidth - 1) << left << "#f:熔炉" << "#" << endl;
+    cout << setw(screenWidth - 1) << left << "#e:合成器" << "#" << endl;
+    cout << setw(screenWidth - 1) << left << "#当按下CapLock时，将会一直摆放上次摆放的机器（方便放置传送带）" << "#" << endl;
+    cout << setw(screenWidth - 1) << left << "#" << "#" << endl;
+    cout << setw(screenWidth - 1) << left << "#游玩提醒：" << "#" << endl;
+    cout << setw(screenWidth - 1) << left << "#" << "#" << endl;
+    cout << setw(screenWidth - 1) << left << "#通过采矿机采掘铁矿" << "#" << endl;
+    cout << setw(screenWidth - 1) << left << "#通过传送带运输铁矿" << "#" << endl;
+    cout << setw(screenWidth - 1) << left << "#通过熔炉烧炼成铁锭" << "#" << endl;
+    cout << setw(screenWidth - 1) << left << "#通过合成机合成铁板" << "#" << endl;
+    cout << setw(screenWidth - 1) << left << "#通过虚空洞提交铁板，达到2000个铁板时，游戏胜利" << "#" << endl;
+
+    for (int i = 0; i < screenHeight - 2 - 22; i++) {
+        cout << "#" << setw(screenWidth - 1) << right << "#" << endl;
     }
 
     for (int i = 0; i < screenWidth; ++i) {
-        cerr << "#";
+        cout << "#";
     }
-    cerr << endl;
+    cout << endl;
 }
 
 char anyKeydown() {
